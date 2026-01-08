@@ -13,7 +13,7 @@ const INITIAL_PRODUCTS: Product[] = PRODUCTS_DATA.map(raw => ({
     stock: 0,
     faces: 0,
     lot: '',
-    expiry: '',
+    expiry: new Date().toISOString().split('T')[0], // Default to today
     category: raw.linea,
     present: true,
     available: true,
@@ -158,7 +158,7 @@ const ProductSelection: React.FC = () => {
                                     <label className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Vencimiento</label>
                                     <input 
                                         className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl px-2 py-1.5 text-xs font-bold text-gray-800 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary" 
-                                        type="text" 
+                                        type="date" 
                                         value={product.expiry}
                                         onChange={(e) => updateProduct(product.id, 'expiry', e.target.value)}
                                     />
@@ -174,11 +174,9 @@ const ProductSelection: React.FC = () => {
                                 </div>
                                 <div className="space-y-1">
                                     <label className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Caras Int.</label>
-                                    <input 
-                                        className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl px-2 py-1.5 text-xs font-bold text-gray-800 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary text-center" 
-                                        type="number"
-                                        value={product.faces}
-                                        onChange={(e) => updateProduct(product.id, 'faces', parseInt(e.target.value) || 0)}
+                                    <Counter 
+                                        value={product.faces} 
+                                        onChange={(val) => updateProduct(product.id, 'faces', val)}
                                     />
                                 </div>
                             </div>

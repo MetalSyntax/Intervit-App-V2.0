@@ -49,31 +49,60 @@ const VisitDashboard: React.FC = () => {
           return;
       }
 
-      const headers = ["ID", "SKU", "Nombre", "Categoria", "Precio", "Inventario", "Caras", "Presencia", "Lote", "Vence", "Competencia", "Precio Comp.", "Caras Comp."];
-      const rows = visitState.products.map(p => [
-          p.id,
-          p.sku,
-          `"${p.name}"`, // Quote strings to handle commas
-          p.category,
-          p.price,
-          p.stock,
-          p.faces,
-          p.present ? "SI" : "NO",
-          p.lot || "",
-          p.expiry || "",
-          p.hasCompetition ? `"${p.competitorData?.name || 'Genérico'}"` : "NO",
-          p.hasCompetition ? p.competitorData?.price : "",
-          p.hasCompetition ? p.competitorData?.faces : ""
-      ]);
+      // 1. Calculate computations
+      const productsData = visitState.products.map(p => {
+          const subtotal = p.stock * p.price;
+          return {
+              ...p,
+              subtotal
+          };
+      });
 
-      const csvContent = "data:text/csv;charset=utf-8," 
-          + headers.join(",") + "\n" 
-          + rows.map(e => e.join(",")).join("\n");
+      const totalAmount = productsData.reduce((acc, curr) => acc + curr.subtotal, 0);
+      const colecciones = totalAmount * 0.02; // Assuming 2% based on sample (1.10 / 55.00)
+      const proximaColeccion = 0; // Defaulting to 0 as no logic exists yet
+      const sobrante = totalAmount; // Matching sample where Sobrante equals Total
 
+      // 2. Build CSV Lines
+      // Note: usage of empty leading columns to match the sample format ",Cliente"
+      const lines: string[] = [];
+
+      // Header Info
+      lines.push(`,Cliente`);
+      lines.push(`,${visitState.client?.name || ''}`);
+      lines.push(`,Codigo`);
+      lines.push(`,${visitState.client?.id || ''}`);
+      
+      // Table Header
+      lines.push(`,Codigo,Productos,Cantidad,Precio Unitario,Subtotal,Descuento`);
+
+      // Rows
+      productsData.forEach(p => {
+          lines.push(`,${p.sku},"${p.name}",${p.stock},${p.price.toFixed(2)},${p.subtotal.toFixed(2)},normal`);
+      });
+
+      // Footer
+      lines.push(`,Precio Total`);
+      lines.push(`,${totalAmount.toFixed(2)}`);
+      lines.push(`,Colecciones`);
+      lines.push(`,${colecciones.toFixed(2)}`);
+      lines.push(`,Proxima Coleccion`);
+      lines.push(`,${proximaColeccion.toFixed(2)}`);
+      lines.push(`,Sobrante`);
+      lines.push(`,${sobrante.toFixed(2)}`);
+
+      // 3. Encode and Download
+      const csvContent = "data:text/csv;charset=utf-8," + lines.join("\n");
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `visita_${visitState.client?.name || 'sin_cliente'}_${visitState.visitDate}.csv`);
+      
+      // Format: Pedido de ID del D-M-YYYY
+      const dateParts = visitState.visitDate.split('-'); // YYYY-MM-DD
+      const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+      const fileName = `Pedido de ${visitState.client?.name || 'Cliente'} - ${visitState.client?.mercaderistaNombre || 'Usuario'} del ${formattedDate}.csv`;
+
+      link.setAttribute("download", fileName);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
