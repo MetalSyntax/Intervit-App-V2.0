@@ -85,7 +85,7 @@ const VisitDashboard: React.FC = () => {
     <Container>
       <HeaderInternal title="Panel de Gestión" showCart={false} showBack={false} />
       
-      <main className="max-w-4xl mx-auto w-full px-4 pb-24 pt-6 space-y-8">
+      <main className="w-full px-4 pb-24 pt-6 space-y-8">
         <section className="text-center space-y-1">
           <h1 className="text-xl font-bold text-gray-800 dark:text-white uppercase">BIENVENIDO!, {userName.toUpperCase()}</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400">Panel de Gestión de Ventas</p>
@@ -262,12 +262,7 @@ const VisitDashboard: React.FC = () => {
           </Button>
         </div>
 
-        <footer className="text-center space-y-2 pt-4 border-t border-gray-200 dark:border-gray-800">
-          <p className="text-xs text-gray-400 dark:text-gray-500">
-            Todos los derechos reservados © 2025.<br />
-            Creado por MetalSyntax para Intervit.
-          </p>
-        </footer>
+
       </main>
     </Container>
   );

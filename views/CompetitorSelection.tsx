@@ -91,7 +91,7 @@ const CompetitorSelection: React.FC = () => {
       {/* Removed Filter Icon via prop */}
       <HeaderInternal title="Intervit" showBack={true} showFilter={false} />
       
-      <main className="max-w-4xl mx-auto w-full px-4 pt-6 space-y-6">
+      <main className="w-full px-4 pt-6 space-y-6">
         <section className="space-y-2">
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
             <Icon name="assessment" className="text-primary" />

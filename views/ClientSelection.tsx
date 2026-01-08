@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Icon } from '../components/UI';
 import { Client, VisitState } from '../types';
 import { CLIENTS_DATA } from '../data';
+import logoIntervit from '../assets/Logo-Intervit.png';
 
 // Map raw data to Client objects
 const mapClient = (raw: any): Client => ({
@@ -93,7 +94,7 @@ const ClientSelection: React.FC = () => {
   return (
     <Container>
       <header className="bg-surface-light dark:bg-surface-dark shadow-sm border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 py-3 relative flex items-center justify-center min-h-[60px]">
+        <div className="px-4 py-3 relative flex items-center justify-center min-h-[60px]">
           <button 
             onClick={() => navigate('/dashboard')} 
             className="absolute left-4 p-2 -ml-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
@@ -102,12 +103,7 @@ const ClientSelection: React.FC = () => {
           </button>
 
           <div className="h-10 w-auto flex items-center justify-center">
-            <svg className="h-10 w-auto" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="100" cy="30" rx="95" ry="25" fill="none" stroke="#EBB105" strokeWidth="3"></ellipse>
-                <path d="M140 10 Q 160 5, 180 15" fill="none" stroke="#EBB105" strokeWidth="2"></path>
-                <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fontSize="28" fontWeight="bold" fontFamily="Arial, sans-serif" fill="#333" className="dark:fill-white">INTERVIT</text>
-                <text x="135" y="32" fontSize="28" fontWeight="bold" fontFamily="Arial, sans-serif" fill="#DC2626">V</text>
-            </svg>
+            <img src={logoIntervit} alt="Logo Intervit" className="h-full w-auto object-contain" />
           </div>
         </div>
         
@@ -183,12 +179,7 @@ const ClientSelection: React.FC = () => {
         </section>
       </main>
 
-      <footer className="w-full py-6 bg-surface-light dark:bg-surface-dark text-center border-t border-gray-100 dark:border-gray-800 mt-auto">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Todos los derechos reservados © 2025.<br />
-          Creado por <span className="font-medium text-gray-700 dark:text-gray-300">MetaSyntax</span> para Intervit.
-        </p>
-      </footer>
+
     </Container>
   );
 };

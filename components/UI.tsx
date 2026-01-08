@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import logoIntervit from '../assets/Logo-Intervit.png';
 
 // --- Icons ---
 export const Icon: React.FC<{ name: string; className?: string }> = ({ name, className = "" }) => (
@@ -8,7 +9,7 @@ export const Icon: React.FC<{ name: string; className?: string }> = ({ name, cla
 
 // --- Layout ---
 export const Container: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = "" }) => (
-  <div className={`min-h-screen flex flex-col w-full max-w-4xl mx-auto bg-background-light dark:bg-background-dark relative shadow-2xl shadow-gray-200 dark:shadow-none ${className}`}>
+  <div className={`min-h-screen flex flex-col w-full bg-background-light dark:bg-background-dark relative shadow-2xl shadow-gray-200 dark:shadow-none ${className}`}>
     {children}
   </div>
 );
@@ -34,7 +35,7 @@ export const HeaderInternal: React.FC<{
   return (
     <>
       <header className="bg-surface-light dark:bg-surface-dark shadow-sm sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 w-full">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div className="px-4 py-3 flex justify-between items-center">
           {showBack ? (
             <button onClick={() => navigate(-1)} className="p-2 -ml-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
               <Icon name="arrow_back" className="text-gray-500 dark:text-gray-400" />
@@ -45,12 +46,7 @@ export const HeaderInternal: React.FC<{
           
           <div className="flex items-center space-x-2">
              <div className="h-8 w-auto flex items-center justify-center">
-                <svg className="h-8 w-auto" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                  <ellipse cx="100" cy="30" rx="95" ry="25" fill="none" stroke="#EBB105" strokeWidth="3"></ellipse>
-                  <path d="M140 10 Q 160 5, 180 15" fill="none" stroke="#EBB105" strokeWidth="2"></path>
-                  <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fontSize="28" fontWeight="bold" fontFamily="Arial, sans-serif" fill="#333" className="dark:fill-white">INTERVIT</text>
-                  <text x="135" y="32" fontSize="28" fontWeight="bold" fontFamily="Arial, sans-serif" fill="#DC2626">V</text>
-                </svg>
+                <img src={logoIntervit} alt="Logo Intervit" className="h-full w-auto object-contain" />
              </div>
           </div>
 
@@ -185,4 +181,14 @@ export const Counter: React.FC<{ value: number; onChange: (val: number) => void;
       </button>
     )}
   </div>
+);
+
+// --- Footer ---
+export const Footer: React.FC = () => (
+  <footer className="w-full py-6 dark:bg-surface-dark text-center border-t border-gray-100 dark:border-gray-800 mt-auto">
+    <p className="text-xs text-gray-500 dark:text-gray-400">
+      Todos los derechos reservados © 2025.<br />
+      Creado por <a href="https://metalsyntax.vercel.app/" target="_blank" rel="noopener noreferrer"><span className="font-medium text-gray-700 dark:text-gray-300">MetaSyntax</span></a> para Intervit.
+    </p>
+  </footer>
 );

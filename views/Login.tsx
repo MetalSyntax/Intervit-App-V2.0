@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, HeaderInternal, Button, Icon } from '../components/UI';
+import { Container, HeaderInternal, Button, Icon, Footer } from '../components/UI';
 import { VisitState } from '../types';
 import { CLIENTS_DATA } from '../data';
 
@@ -100,12 +100,7 @@ const Login: React.FC = () => {
         </div>
       </div>
 
-      <footer className="w-full py-6 bg-surface-light dark:bg-surface-dark text-center border-t border-gray-100 dark:border-gray-800 mt-auto">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Todos los derechos reservados © 2025.<br />
-          Creado por <span className="font-medium text-gray-700 dark:text-gray-300">MetaSyntax</span> para Intervit.
-        </p>
-      </footer>
+      <Footer />
     </Container>
   );
 };

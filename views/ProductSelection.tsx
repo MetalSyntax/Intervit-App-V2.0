@@ -73,7 +73,7 @@ const ProductSelection: React.FC = () => {
     <Container className="pb-44">
        <HeaderInternal title="Selección de Productos" showCart={false} />
        
-       <main className="max-w-4xl mx-auto w-full relative">
+       <main className="w-full relative">
          <div className="sticky top-[65px] z-40 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm pt-4 pb-2 px-4 transition-all border-b border-transparent shadow-sm">
             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
                 <Icon name="inventory" className="text-primary" />
